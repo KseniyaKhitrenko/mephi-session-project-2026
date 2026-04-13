@@ -1,0 +1,45 @@
+echo "Hello from Student: 255657" > /data/mephi-web/index.html
+exit
+pwd
+history > /home/mephi-admin/project_history.txt
+ping -c 4 192.168.1.1 > /home/mephi-admin/network_check.txt
+ping -c 4 8.8.8.8 >> /home/mephi-admin/network_check.txt
+sudo jornalctl -u nginx --since "1 hour ago" > /home/mephi-admin/nginx_recent_logs.txt
+su -
+sudo jornalctl -u nginx --since "1 hour ago" > /home/mephi-admin/nginx_recent_logs.txt
+su -
+pwd
+curl http://localhost
+git init
+git config --global user.name "KseniyaKhitrenko"
+git config --global user.email "ks_hit96@mail.ru"
+
+curl http://localhost
+git add *.txt index.html *.rpm
+git add *.txt index.html 
+git commit -m "Add MEPHI session project 2026 files"
+git branch -M main
+git remote add origin https://github.com/KseniyaKhitrenko/mephi-session-project-2026.git
+git remote remove origin
+git remote add origin https://github.com/KseniyaKhitrenko/mephi-session-project-2026.git
+git push -u origin main
+ping -c 3 google.com
+git remote remove origin
+git remote add origin https://github.com/KseniyaKhitrenko/mephi-session-project-2026.git
+git push -u origin main
+cat ~/project_history.txt
+history -a
+usermod -aG wheel mephi-admin
+exit
+journalctl -u nginx --since "1 hour ago" > /home/mephi-admin/nginx_recent_logs.txt
+cp /etc/fstab /home/mephi-admin/fstab.txt
+getenforce > /home/mephi-admin/selinux_status.txt
+ls -Zd /data/mephi-web > /home/mephi-admin/file_contexts.txt
+stat /data/mephi-web > /home/mephi-admin/permissions.txt
+id mephi-admin > /home/mephi-admin/users_groups.txt
+getent group mephi-devs >> /home/mephi-admin/users_groups.txt
+cp /data/mephi-web/index.html /home/mephi-admin/index.html
+curl -s http://localhost > /home/mephi-admin/curl_output.txt
+chown -R mephi-admin:mephi-admin /home/mephi-admin/
+exit
+history -a
