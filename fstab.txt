@@ -15,4 +15,3 @@ UUID=7BAE-E0BA /boot/efi vfat umask=0077,shortname=winnt 0 2
 UUID=531a9484-f1b4-4021-8aca-1407c8ce72cd /home btrfs subvol=home,compress=zstd:1 0 0
 #LABEL=MEPHI_DATA /data/mephi-web ext4 defaults,nofail 0 2
 /dev/vg_mephi/lv_data /data/mephi-web ext4 defaults,nofail 0 2
-LABEL=MEPHI_DATA /data/mephi-web ext4 defaults 0 2
