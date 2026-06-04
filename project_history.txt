@@ -1,19 +1,26 @@
-echo "Hello from Student: 255657" > /data/mephi-web/index.html
-exit
-pwd
-history > /home/mephi-admin/project_history.txt
+sudo nmcli connection modify "Wired connection 1" ipv4.addresses 192.168.1.100/24 ipv4.gateway 192.168.1.1 ipv4.method manual
+sudo hostnamectl set-hostname mephi-server-2026
 ping -c 4 192.168.1.1 > /home/mephi-admin/network_check.txt
 ping -c 4 8.8.8.8 >> /home/mephi-admin/network_check.txt
-sudo jornalctl -u nginx --since "1 hour ago" > /home/mephi-admin/nginx_recent_logs.txt
+sudo dnf install -y nginx curl tcpdump
+dnf download tcpdump --destdir=/home/mephi-admin/
+mv /home/mephi-admin/tcpdump-*.rpm /home/mephi-admin/tcpdump.rpm
+sudo fdisk /dev/sdb
+sudo mkfs.ext4 /dev/sdb1
+sudo mkdir -p /data/mephi-web
+echo "/dev/sdb1 /data/mephi-web ext4 defaults 0 2" | sudo tee -a /etc/fstab
+sudo mount -a
+echo "Hello from Student: 255657" > /data/mephi-web/index.html
+pwd
+sudo journalctl -u nginx --since "1 hour ago" > /home/mephi-admin/nginx_recent_logs.txt
 su -
-sudo jornalctl -u nginx --since "1 hour ago" > /home/mephi-admin/nginx_recent_logs.txt
+sudo journalctl -u nginx --since "1 hour ago" > /home/mephi-admin/nginx_recent_logs.txt
 su -
 pwd
 curl http://localhost
 git init
 git config --global user.name "KseniyaKhitrenko"
 git config --global user.email "ks_hit96@mail.ru"
-
 curl http://localhost
 git add *.txt index.html *.rpm
 git add *.txt index.html 
@@ -29,12 +36,19 @@ git remote add origin https://github.com/KseniyaKhitrenko/mephi-session-project-
 git push -u origin main
 cat ~/project_history.txt
 history -a
-usermod -aG wheel mephi-admin
+sudo groupadd mephi-devs
+sudo useradd -m -s /bin/bash mephi-admin
+sudo usermod -aG wheel mephi-admin
 exit
-journalctl -u nginx --since "1 hour ago" > /home/mephi-admin/nginx_recent_logs.txt
+sudo journalctl -u nginx --since "1 hour ago" > /home/mephi-admin/nginx_recent_logs.txt
 cp /etc/fstab /home/mephi-admin/fstab.txt
 getenforce > /home/mephi-admin/selinux_status.txt
+sudo semanage fcontext -a -t httpd_sys_content_t "/data/mephi-web(/.*)?"
+sudo restorecon -R -v /data/mephi-web
 ls -Zd /data/mephi-web > /home/mephi-admin/file_contexts.txt
+sudo setcap 'cap_net_raw,cap_net_admin=+ep' /usr/sbin/tcpdump
+getcap /usr/sbin/tcpdump > /home/mephi-admin/tcpdump_capabilities.txt
+sudo authselect select sssd with-mkhomedir --force
 stat /data/mephi-web > /home/mephi-admin/permissions.txt
 id mephi-admin > /home/mephi-admin/users_groups.txt
 getent group mephi-devs >> /home/mephi-admin/users_groups.txt
